@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Standard permission bypass for full-stack server proxy environment
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

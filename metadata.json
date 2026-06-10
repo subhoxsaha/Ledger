@@ -1,0 +1,6 @@
+{
+  "name": "Simple Web-Based Event Ledger",
+  "description": "A streamlined financial dashboard for university and college events to track party collections and vendor expenses, generate dynamic mock UPI QR codes, simulate automated WhatsApp webhook updates, and retrieve instant ledger reconciliation insights powered by Gemini AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

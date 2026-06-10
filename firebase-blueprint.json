@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "party": {
+      "title": "Party",
+      "description": "Represents a student participant (customer) or supplier (vendor)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["customer", "supplier"] },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "initialBalance": { "type": "number" },
+        "currentBalance": { "type": "number" }
+      },
+      "required": ["id", "name", "type", "initialBalance", "currentBalance"]
+    },
+    "transaction": {
+      "title": "Transaction",
+      "description": "Represents cashflow log entries inside the cashbook",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["cash_in", "cash_out"] },
+        "partyId": { "type": "string" },
+        "partyName": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMode": { "type": "string", "enum": ["cash", "bank", "upi"] },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "date", "type", "partyId", "partyName", "amount", "paymentMode"]
+    },
+    "whatsappLog": {
+      "title": "WhatsApp Log",
+      "description": "Represents simulated WhatsApp status logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "type": { "type": "string", "enum": ["invoice", "payment_reminder", "entry_ticket"] },
+        "recipient": { "type": "string" },
+        "partyName": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["sent", "failed"] }
+      },
+      "required": ["id", "timestamp", "type", "recipient", "partyName", "message", "status"]
+    },
+    "metadata": {
+      "title": "Metadata",
+      "description": "Represents application global states",
+      "type": "object",
+      "properties": {
+        "openingBalance": { "type": "number" }
+      },
+      "required": ["openingBalance"]
+    }
+  },
+  "firestore": {
+    "parties/{partyId}": {
+      "schema": "party",
+      "description": "Collection of participant and supplier ledgers"
+    },
+    "transactions/{transactionId}": {
+      "schema": "transaction",
+      "description": "Collection of chronological transactions"
+    },
+    "whatsappLogs/{logId}": {
+      "schema": "whatsappLog",
+      "description": "Simulated WhatsApp alerts archives"
+    },
+    "globals/config": {
+      "schema": "metadata",
+      "description": "Global configuration document"
+    }
+  }
+}
